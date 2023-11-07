@@ -27,13 +27,13 @@ def main():
 
 def setup_args():
     parser = argparse.ArgumentParser(description='Batch newpipe subscription json output')
-    parser.add_argument('-s','--source',type=str
-                        ,help='source file location for the newpipe json file',required=True)
+    parser.add_argument('-s','--source',type=str,
+                        help='source file location for the newpipe json file',required=True)
     
     parser.add_argument('-o','--outDir',type=str,
                     help='output file directory where you want the batch files to live',required=True)
     
-    parser.add_argument("-b","--batchSize",type=int,choices=(range(1,99)),required=False,default=99,
+    parser.add_argument("-b","--batchSize",type=int,choices=(range(1,100)),required=False,default=99,
                         help="the amount of subscriptions in each file")
 
     return parser.parse_args()
