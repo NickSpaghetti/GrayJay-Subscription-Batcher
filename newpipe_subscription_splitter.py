@@ -3,9 +3,7 @@ from pathlib import Path
 import argparse
 
 def main():
-    print("hi")
     args = setup_args()
-    print(args)
     file_name = args.source
     text = ""
     with open(file_name, "r+") as f:
@@ -13,7 +11,7 @@ def main():
 
     subs =  text["subscriptions"]
     subFileCount = 1
-    bathSize = 99
+    bathSize = args.batchSize
     outputFilePath = args.outDir
     Path(outputFilePath).mkdir(parents=True,exist_ok=True)
     subBatchs = [subs[i:i+bathSize] for i in range(0,len(subs),bathSize)]
@@ -29,9 +27,14 @@ def main():
 
 def setup_args():
     parser = argparse.ArgumentParser(description='Batch newpipe subscription json output')
-    parser.add_argument('-s','--source',type=str,help='source file location for the newpipe json file',required=True)
+    parser.add_argument('-s','--source',type=str
+                        ,help='source file location for the newpipe json file',required=True)
+    
     parser.add_argument('-o','--outDir',type=str,
                     help='output file directory where you want the batch files to live',required=True)
+    
+    parser.add_argument("-b","--batchSize",type=int,choices=(range(1,99)),required=False,default=99,
+                        help="the amount of subscriptions in each file")
 
     return parser.parse_args()
         
