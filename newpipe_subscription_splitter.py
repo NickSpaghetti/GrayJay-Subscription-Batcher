@@ -11,10 +11,10 @@ def main():
 
     subs =  text["subscriptions"]
     subFileCount = 1
-    bathSize = args.batchSize
+    batchSize = args.batchSize
     outputFilePath = args.outDir
     Path(outputFilePath).mkdir(parents=True,exist_ok=True)
-    subBatchs = [subs[i:i+bathSize] for i in range(0,len(subs),bathSize)]
+    subBatchs = [subs[i:i+batchSize] for i in range(0,len(subs),batchSize)]
     for subBatch in subBatchs:
         with open(rf"{outputFilePath}\subFile_{subFileCount}.json", "w") as f:
             newPipeSub = {
